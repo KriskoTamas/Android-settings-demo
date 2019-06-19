@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="display_text"
+        android:summaryOff="Invisible"
+        android:summaryOn="Visible"
+        android:title="@string/display_text"
+    />
+    <Preference
+        android:title="Change color"
+        android:key="text_color"
+    />
+    <Preference
+        android:title="Change text size"
+        android:key="text_size"
+    />
+</PreferenceScreen>
