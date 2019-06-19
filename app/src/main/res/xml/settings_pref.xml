@@ -8,11 +8,13 @@
         android:title="@string/display_text"
     />
     <Preference
-        android:title="Change color"
+        android:title="Change text color"
         android:key="text_color"
+        android:summary="Changes the color of the text"
     />
     <Preference
         android:title="Change text size"
         android:key="text_size"
+        android:summary="Changes the size of the text"
     />
 </PreferenceScreen>
