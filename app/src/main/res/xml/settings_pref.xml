@@ -10,10 +10,13 @@
             android:summaryOn="Visible"
             android:title="@string/display_text"
         />
-        <Preference
-            android:title="Change text color"
+        <ListPreference
             android:key="text_color"
             android:summary="Changes the color of the text"
+            android:title="Change text color"
+            android:defaultValue="pref_color_red_value"
+            android:entries="@array/pref_color_option_labels"
+            android:entryValues="@array/pref_color_option_values"
         />
         <Preference
             android:title="Change text size"
@@ -27,8 +30,8 @@
         <Preference
             android:title="Report bugs"
             android:key="report_bugs"
-            android:summary="Any bugs found? Please contact me: tomi.krisko@gmail.com"
-        />
+            android:summary="Any bugs found? Please contact me: tomi.krisko@gmail.com">
+        </Preference>
         <Preference
             android:title="Website"
             android:key="website"

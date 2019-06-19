@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 // import android.support.v7.app.AppCompatActivity;
+import androidx.preference.Preference.OnPreferenceClickListener;
+import androidx.preference.PreferenceCategory;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -75,19 +77,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) { // changing the state of an option (not click)
         if (key.equals("display_text")) {
-            setTextVisible(sharedPreferences.getBoolean("display_text",true));
+            setTextVisible(sharedPreferences.getBoolean("display_text", true));
             // openDialog("Most épp egy nagyon fontos döntés előtt állsz. Igen vagy nem?");
         }
     }
 
-    /*
-    @Override
-    public void onSharedPreferenceSelected(SharedPreferences sharedPreferences, String key) {
-        if (key.equals("display_text")) {
-            setTextVisible(sharedPreferences.getBoolean("display_text",true));
-        }
-    }
-    */
     @Override
     protected void onDestroy() {
         super.onDestroy();

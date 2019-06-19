@@ -6,4 +6,18 @@
     <string name="text_size">Text Size</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- Label for red color preference -->
+    <string name="pref_color_label_red">Red</string>
+    <!-- Label for blue color preference -->
+    <string name="pref_color_label_blue">Blue</string>
+    <!-- Label for green color preference -->
+    <string name="pref_color_label_green">Green</string>
+
+    <!-- Value in SharedPreferences for red color option -->
+    <string name="pref_color_red_value" translatable="false">red</string>
+    <!-- Value in SharedPreferences for blue color option -->
+    <string name="pref_color_blue_value" translatable="false">blue</string>
+    <!-- Value in SharedPreferences for green color option -->
+    <string name="pref_color_green_value" translatable="false">green</string>
 </resources>
