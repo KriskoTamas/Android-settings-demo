@@ -28,6 +28,14 @@
             android:title="Report bugs"
             android:key="report_bugs"
             android:summary="Any bugs found? Please contact me: tomi.krisko@gmail.com"
-            />
+        />
+        <Preference
+            android:title="Website"
+            android:key="website"
+            android:summary="https://www.hasznosdolgok.ml">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://www.hasznosdolgok.ml" />
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
