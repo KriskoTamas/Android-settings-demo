@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 // import android.support.v7.app.AppCompatActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import static java.net.Proxy.Type.HTTP;
 // import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -29,6 +32,19 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"tomi.krisko@gmail.com"}); // recipients
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Bug report");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "I have found a bug in your app...");
+        // emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
+        emailIntent.putExtra(Intent.EXTRA_PACKAGE_NAME, "com.google.android.gm");
+        // You can also attach multiple items by passing an ArrayList of Uris
+
+        startActivity(emailIntent);
+        */
 
         customText = findViewById(R.id.customText);
 

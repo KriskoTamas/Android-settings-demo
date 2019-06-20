@@ -33,7 +33,13 @@
         <Preference
             android:title="Report bugs"
             android:key="report_bugs"
-            android:summary="Any bugs found? Please contact me: tomi.krisko@gmail.com" />
+            android:summary="Any bugs found? Please contact me: tomi.krisko@gmail.com">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="mailto:tomi.krisko@gmail.com?subject=Bug report">
+                <extra android:name="android.intent.extra.TEXT" android:value="I have found a bug in your app..." />
+            </intent>
+        </Preference>
 
         <Preference
             android:title="Website"
