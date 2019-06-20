@@ -33,17 +33,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         customText = findViewById(R.id.customText);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        customText.setVisibility(prefs.getBoolean("key_text_display", true) ? View.VISIBLE : View.INVISIBLE);
-        customText.setTextSize(Float.parseFloat(prefs.getString("key_text_size", "15")));
-        customText.setText(prefs.getString("key_text_to_display", "Full custom text"));
-        String pref_color_value = prefs.getString("key_text_color", "black");
+        customText.setVisibility(prefs.getBoolean("key_text_display", Boolean.parseBoolean(getString(R.string.pref_text_display_def))) ? View.VISIBLE : View.INVISIBLE);
+        customText.setTextSize(Float.parseFloat(prefs.getString("key_text_size", getString(R.string.pref_text_size_def))));
+        customText.setText(prefs.getString("key_text_to_display", getString(R.string.pref_text_to_display_def)));
+        String pref_color_value = prefs.getString("key_text_color", getString(R.string.pref_text_color_def));
         try{
             customText.setTextColor(Color.parseColor(pref_color_value));
         }
         catch(Exception e){
-            customText.setTextColor(Color.parseColor("black")); // you can use hex (#ff0000) color or color names like "red"
+            customText.setTextColor(Color.parseColor(getString(R.string.pref_text_color_def))); // you can use hex (#ff0000) color or color names like "red"
         }
-        // Toast.makeText(this, "wow!", Toast.LENGTH_LONG).show();
 
         setupSharedPreferences();
     }
@@ -55,8 +54,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     // Method to set Visibility of Text.
     private void loadTextDisplayFromPref(SharedPreferences sharedPreferences) {
-        boolean display = Boolean.parseBoolean(sharedPreferences.getString("key_text_display", getString(R.string.pref_text_display_def)));
-        customText.setVisibility(display ? View.VISIBLE : View.INVISIBLE);
+        customText.setVisibility(sharedPreferences.getBoolean("key_text_display", Boolean.parseBoolean(getString(R.string.pref_text_display_def))) ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void loadTextToDisplayFromPref(SharedPreferences sharedPreferences) {
@@ -88,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // System.out.println("select");
+        // System.out.println("\nOUTPUT TO CONSOLE\n");
         /*
         Toast toast = Toast.makeText(getApplicationContext(), "Üzenet!", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP | Gravity.LEFT, 80, 0);
@@ -115,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         } else if (key.equals("key_text_color")) {
             loadTextColorFromPref(sharedPreferences);
         }
+
     }
 
     @Override

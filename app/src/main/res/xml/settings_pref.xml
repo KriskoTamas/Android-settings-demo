@@ -33,8 +33,7 @@
         <Preference
             android:title="Report bugs"
             android:key="report_bugs"
-            android:summary="Any bugs found? Please contact me: tomi.krisko@gmail.com">
-        </Preference>
+            android:summary="Any bugs found? Please contact me: tomi.krisko@gmail.com" />
 
         <Preference
             android:title="Website"
