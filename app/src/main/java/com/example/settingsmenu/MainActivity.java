@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,9 +33,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         customText = findViewById(R.id.customText);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        customText.setVisibility(prefs.getBoolean("display", true) ? View.VISIBLE : View.INVISIBLE);
-        customText.setTextSize(Float.parseFloat(prefs.getString("size", "15")));
-        String pref_color_value = prefs.getString("color", "black");
+        customText.setVisibility(prefs.getBoolean("key_text_display", true) ? View.VISIBLE : View.INVISIBLE);
+        customText.setTextSize(Float.parseFloat(prefs.getString("key_text_size", "15")));
+        customText.setText(prefs.getString("key_text_to_display", "Full custom text"));
+        String pref_color_value = prefs.getString("key_text_color", "black");
         try{
             customText.setTextColor(Color.parseColor(pref_color_value));
         }
@@ -52,35 +54,29 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     // Method to set Visibility of Text.
-    private void setTextVisible(boolean display) {
+    private void loadTextDisplayFromPref(SharedPreferences sharedPreferences) {
+        boolean display = Boolean.parseBoolean(sharedPreferences.getString("key_text_display", getString(R.string.pref_text_display_def)));
         customText.setVisibility(display ? View.VISIBLE : View.INVISIBLE);
     }
 
-    // Method to set Color of Text.
-    private void changeTextColor(String pref_color_value) {
-        Log.d("Parzival", pref_color_value);
+    private void loadTextToDisplayFromPref(SharedPreferences sharedPreferences) {
+        String text = sharedPreferences.getString("key_text_to_display", getString(R.string.pref_text_to_display_def));
+        customText.setText(text);
+    }
+
+    private void loadTextSizeFromPref(SharedPreferences sharedPreferences) {
+        float size = Float.parseFloat(sharedPreferences.getString("key_text_size", getString(R.string.pref_text_size_def)));
+        customText.setTextSize(size);
+    }
+
+    private void loadTextColorFromPref(SharedPreferences sharedPreferences) {
+        String color = sharedPreferences.getString("key_text_color", getString(R.string.pref_text_color_def));
         try{
-            customText.setTextColor(Color.parseColor(pref_color_value));
+            customText.setTextColor(Color.parseColor(color));
         }
         catch(Exception e){
-            customText.setTextColor(Color.parseColor("black")); // you can use hex (#ff0000) color or color names like "red"
+            customText.setTextColor(Color.parseColor(getString(R.string.pref_text_color_def))); // you can use hex (#ff0000) color or color names like "red"
         }
-    }
-
-    // Method to set Size of Text.
-    private void changeTextSize(Float i) {
-        customText.setTextSize(i);
-    }
-
-    // Method to pass value from SharedPreferences
-    private void loadColorFromPreference(SharedPreferences sharedPreferences) {
-        Log.d("Parzival",sharedPreferences.getString(getString(R.string.pref_color_key),getString(R.string.pref_color_red_value)));
-        changeTextColor(sharedPreferences.getString(getString(R.string.pref_color_key),getString(R.string.pref_color_red_value)));
-    }
-
-    private void loadSizeFromPreference(SharedPreferences sharedPreferences) {
-        float minSize = Float.parseFloat(sharedPreferences.getString(getString(R.string.pref_size_key), "16.0"));
-        changeTextSize(minSize);
     }
 
     @Override
@@ -92,6 +88,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // System.out.println("select");
+        /*
+        Toast toast = Toast.makeText(getApplicationContext(), "Üzenet!", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP | Gravity.LEFT, 80, 0);
+        toast.show();
+        */
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
@@ -104,12 +106,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-        if (key.equals("display")) {
-            setTextVisible(sharedPreferences.getBoolean("display",true));
-        } else if (key.equals("color")) {
-            loadColorFromPreference(sharedPreferences);
-        } else if (key.equals("size"))  {
-            loadSizeFromPreference(sharedPreferences);
+        if (key.equals("key_text_display")) {
+            loadTextDisplayFromPref(sharedPreferences);
+        } else if (key.equals("key_text_to_display")) {
+            loadTextToDisplayFromPref(sharedPreferences);
+        } else if (key.equals("key_text_size"))  {
+            loadTextSizeFromPref(sharedPreferences);
+        } else if (key.equals("key_text_color")) {
+            loadTextColorFromPref(sharedPreferences);
         }
     }
 

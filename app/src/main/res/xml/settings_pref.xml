@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:key="category_basic"
-        android:title="Basic settings">
+        android:title="Basic settings"
+        android:key="category_basic">
         <CheckBoxPreference
+            android:title="@string/pref_text_display"
+            android:key="key_text_display"
             android:defaultValue="true"
-            android:key="display"
             android:summaryOff="Invisible"
-            android:summaryOn="Visible"
-            android:title="@string/display_text" />
-
-        <ListPreference
-            android:defaultValue="pref_color_black_value"
-            android:entries="@array/color_labels"
-            android:entryValues="@array/color_values"
-            android:key="@string/pref_color_key"
-            android:title="@string/change_text_color" />
+            android:summaryOn="Visible" />
 
         <EditTextPreference
-            android:defaultValue="@string/pref_size_default"
-            android:key="@string/pref_size_key"
-            android:title="@string/text_size" />
+            android:title="@string/pref_text_to_display"
+            android:key="key_text_to_display"
+            android:defaultValue="@string/pref_text_to_display_def" />
+
+        <EditTextPreference
+            android:title="@string/pref_text_size"
+            android:key="key_text_size"
+            android:defaultValue="@string/pref_text_size_def" />
+
+        <ListPreference
+            android:title="@string/pref_text_color"
+            android:key="key_text_color"
+            android:defaultValue="@string/pref_text_color_def"
+            android:entries="@array/color_labels"
+            android:entryValues="@array/color_values" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="category_contact"
