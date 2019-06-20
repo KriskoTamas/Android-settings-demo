@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="pref_color_option_labels">
-        <item>@string/pref_color_label_red</item>
-        <item>@string/pref_color_label_blue</item>
-        <item>@string/pref_color_label_green</item>
+    <!-- Label ordering must match values -->
+    <array name="color_labels">
+        <item>Black</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
     </array>
-    <array name="pref_color_option_values">
-        <item>@string/pref_color_red_value</item>
-        <item>@string/pref_color_blue_value</item>
-        <item>@string/pref_color_green_value</item>
+
+    <array name="color_values">
+        <item>black</item>
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
     </array>
 </resources>
