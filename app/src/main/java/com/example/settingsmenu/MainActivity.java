@@ -1,16 +1,12 @@
 package com.example.settingsmenu;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,9 +16,6 @@ import android.widget.Toast;
 // import android.support.v7.app.AppCompatActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import static java.net.Proxy.Type.HTTP;
-// import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -48,19 +41,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         customText = findViewById(R.id.customText);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        customText.setVisibility(prefs.getBoolean("key_text_display", Boolean.parseBoolean(getString(R.string.pref_text_display_def))) ? View.VISIBLE : View.INVISIBLE);
-        customText.setTextSize(Float.parseFloat(prefs.getString("key_text_size", getString(R.string.pref_text_size_def))));
-        customText.setText(prefs.getString("key_text_to_display", getString(R.string.pref_text_to_display_def)));
-        String pref_color_value = prefs.getString("key_text_color", getString(R.string.pref_text_color_def));
-        try{
-            customText.setTextColor(Color.parseColor(pref_color_value));
-        }
-        catch(Exception e){
-            customText.setTextColor(Color.parseColor(getString(R.string.pref_text_color_def))); // you can use hex (#ff0000) color or color names like "red"
-        }
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        loadTextDisplayFromPref(sharedPreferences);
+        loadTextToDisplayFromPref(sharedPreferences);
+        loadTextSizeFromPref(sharedPreferences);
+        loadTextColorFromPref(sharedPreferences);
 
         setupSharedPreferences();
+    }
+
+    public void btnClick(View view){
+        CustomDialogClass cdd = new CustomDialogClass(this);
+        cdd.show();
     }
 
     private void setupSharedPreferences() {
@@ -68,28 +60,33 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
-    // Method to set Visibility of Text.
     private void loadTextDisplayFromPref(SharedPreferences sharedPreferences) {
         customText.setVisibility(sharedPreferences.getBoolean("key_text_display", Boolean.parseBoolean(getString(R.string.pref_text_display_def))) ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void loadTextToDisplayFromPref(SharedPreferences sharedPreferences) {
-        String text = sharedPreferences.getString("key_text_to_display", getString(R.string.pref_text_to_display_def));
-        customText.setText(text);
+        customText.setText(sharedPreferences.getString("key_text_to_display", getString(R.string.pref_text_to_display_def)));
     }
 
     private void loadTextSizeFromPref(SharedPreferences sharedPreferences) {
-        float size = Float.parseFloat(sharedPreferences.getString("key_text_size", getString(R.string.pref_text_size_def)));
-        customText.setTextSize(size);
+        String pref_size_value = sharedPreferences.getString("key_text_size", getString(R.string.pref_text_size_def));
+        try{
+            customText.setTextSize(Float.parseFloat(pref_size_value));
+        }
+        catch(Exception e){
+            customText.setTextSize(Float.parseFloat(getString(R.string.pref_text_size_def)));
+            Toast.makeText(getApplicationContext(), "The text size has been set to default due to an unexpected exception", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void loadTextColorFromPref(SharedPreferences sharedPreferences) {
-        String color = sharedPreferences.getString("key_text_color", getString(R.string.pref_text_color_def));
+        String pref_color_value = sharedPreferences.getString("key_text_color", getString(R.string.pref_text_color_def));
         try{
-            customText.setTextColor(Color.parseColor(color));
+            customText.setTextColor(Color.parseColor(pref_color_value));
         }
         catch(Exception e){
             customText.setTextColor(Color.parseColor(getString(R.string.pref_text_color_def))); // you can use hex (#ff0000) color or color names like "red"
+            Toast.makeText(getApplicationContext(), "The text color has been set to default due to an unexpected exception", Toast.LENGTH_LONG).show();
         }
     }
 

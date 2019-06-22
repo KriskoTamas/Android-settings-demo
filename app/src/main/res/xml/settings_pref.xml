@@ -13,19 +13,23 @@
         <EditTextPreference
             android:title="@string/pref_text_to_display"
             android:key="key_text_to_display"
-            android:defaultValue="@string/pref_text_to_display_def" />
+            android:defaultValue="@string/pref_text_to_display_def"
+            android:dialogIcon="@mipmap/ic_android_logo" />
 
         <EditTextPreference
+            android:id="@+id/number_input"
             android:title="@string/pref_text_size"
             android:key="key_text_size"
-            android:defaultValue="@string/pref_text_size_def" />
+            android:defaultValue="@string/pref_text_size_def"
+            android:dialogIcon="@mipmap/ic_android_logo" />
 
         <ListPreference
             android:title="@string/pref_text_color"
             android:key="key_text_color"
             android:defaultValue="@string/pref_text_color_def"
             android:entries="@array/color_labels"
-            android:entryValues="@array/color_values" />
+            android:entryValues="@array/color_values"
+            android:dialogIcon="@mipmap/ic_android_logo" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="category_contact"
